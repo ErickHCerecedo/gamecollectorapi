@@ -268,7 +268,7 @@ definitions:
     type: object
     properties:
       id:
-        type: string
+        type: number
         description: identifier
       name:
         type: string

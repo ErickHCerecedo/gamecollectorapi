@@ -6,6 +6,7 @@ var controllerHelper = require('../helpers/controller.helper');
 var messageHelper = require('../helpers/message.helper');
 var gamesystemService = require('../services/gamesystem.service');
 
+const { Gamesystems } = require('../models');	// Sequelize
 ////////////////////////////////////////////////////////////////////////////////
 // CONSTANTS
 ////////////////////////////////////////////////////////////////////////////////
@@ -26,6 +27,30 @@ const GS_CT_DELETED_SUCCESSFULLY = 'Gamesystem deleted successfully';
 function getGameSystems(req, res) {
 
   try {
+
+   console.log("gamesystems...");
+   console.log(Gamesystems);
+   Gamesystems.findAll({
+    /*include: [{
+      model: orderstatus
+
+    }]
+
+    include: [{ all: true, nested: true }]*/
+      })
+   .then((consoles) => {
+     console.log(consoles);
+     res.status(200).send(consoles);
+     //utils.writeJson(res, consoles);
+   }, (error) => {
+     res.status(500).send(error);
+   });
+
+  } catch (error) {
+    controllerHelper.handleErrorResponse(MODULE_NAME, getGameSystems.name, error, res);
+  }
+
+  /*try {
     // Receiving parameters
     var params = {
       name: req.swagger.params.name.value,
@@ -39,7 +64,7 @@ function getGameSystems(req, res) {
     res.json(result);
   } catch (error) {
     controllerHelper.handleErrorResponse(MODULE_NAME, getGameSystems.name, error, res);
-  }
+  }*/
 }
 
 function getGameSystemById(req, res) {
@@ -66,7 +91,41 @@ function getGameSystemById(req, res) {
 
 function createGameSystem(req, res) {
 
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,contenttype'); // If needed
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+
   try {
+
+    console.log("params : ");
+    var mygamesystem = req.body;
+    console.log("gamesystems ... " + mygamesystem);
+
+      return Gamesystems
+        .create({
+          name: mygamesystem.name,
+          description: mygamesystem.description,
+
+        }, {
+        /*  include: [{
+            model: order_detail,
+            as: 'orderdetail'
+          }] */
+        })
+        .then((mygamesystem) => {
+          res.status(201).send(mygamesystem);
+
+        })
+        .catch((error) => res.status(400).send(error));
+
+
+  } catch (error) {
+    console.log("Was an error");
+    controllerHelper.handleErrorResponse(MODULE_NAME, createGameSystem.name, error, res);
+  }
+
+  /*try {
     // Receiving parameters
     var params = req.body;
 
@@ -81,7 +140,7 @@ function createGameSystem(req, res) {
     }
   } catch (error) {
     controllerHelper.handleErrorResponse(MODULE_NAME, createGameSystem.name, error, res);
-  }
+  }*/
 }
 
 function updateGameSystem(req, res) {
