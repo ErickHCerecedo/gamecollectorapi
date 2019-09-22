@@ -3,10 +3,11 @@ info:
   version: "0.0.1"
   title: Hello World App
 # during dev, should point to your local machine
-host: localhost:10010
-# basePath prefixes all resource paths 
+host: game-5c5f2.web.app
+#host: localhost:10010
+# basePath prefixes all resource paths
 basePath: /
-# 
+#
 schemes:
   # tip: remove http to make production-grade
   - http
@@ -64,7 +65,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  
+
   /gamesystems/{id}:
     x-swagger-router-controller: gamesystem.controller
     get:
@@ -84,7 +85,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-            
+
     put:
       description: update a game system
       operationId : updateGameSystem
@@ -109,7 +110,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  
+
     delete:
       description: delete a game system
       operationId: deleteGameSystem
@@ -225,7 +226,7 @@ paths:
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"  
+            $ref: "#/definitions/ErrorResponse"
     delete:
       description: delete a videogame
       # define the parameters
@@ -244,7 +245,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  
+
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions

@@ -1,25 +1,25 @@
 {
   "development": {
     "username": "postgres",
-    "password": "adsoft",
-    "database": "erick",
-    "host": "35.222.30.102",
+    "password": "admin123",
+    "database": "Gamesystem",
+    "host": "35.184.114.44",
     "dialect": "postgres",
     "operatorsAliases": false
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
+    "username": "postgres",
+    "password": "admin123",
+    "database": "Gamesystem",
+    "host": "35.184.114.44",
     "dialect": "postgres",
     "operatorsAliases": false
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "postgres",
+    "password": "admin123",
+    "database": "Gamesystem",
+    "host": "35.184.114.44",
     "dialect": "postgres",
     "operatorsAliases": false
   }
